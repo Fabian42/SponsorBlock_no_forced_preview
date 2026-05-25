@@ -2464,15 +2464,6 @@ async function sendSubmitMessage(): Promise<boolean> {
         return false;
     }
 
-    if (!previewedSegment 
-            && !sponsorTimesSubmitting.every((segment) => 
-                [ActionType.Full, ActionType.Chapter, ActionType.Poi].includes(segment.actionType) 
-                    || segment.segment[1] >= getVideoDuration()
-                    || segment.segment[0] === 0)) {
-        alert(`${chrome.i18n.getMessage("previewSegmentRequired")} ${keybindToString(Config.config.previewKeybind)}`);
-        return false;
-    }
-
     // Add loading animation
     playerButtons.submit.image.src = chrome.runtime.getURL("icons/PlayerUploadIconSponsorBlocker.svg");
     const stopAnimation = AnimationUtils.applyLoadingAnimation(playerButtons.submit.button, 1, () => updateEditButtonsOnPlayer());
